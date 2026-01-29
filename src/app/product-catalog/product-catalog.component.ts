@@ -17,18 +17,20 @@ interface Product {
     <div class="catalog">
       <h2>Product Catalog</h2>
       <div class="product-grid">
-        <div class="product-card" *ngFor="let product of products">
-          <h3>{{ product.name }}</h3>
-          <p>{{ product.description }}</p>
-          <div class="product-footer">
-            <span class="price">\${{ product.price }}</span>
-            <div class="actions">
-              <button (click)="addToRxjsStore(product)">Add to RxJS</button>
-              <button (click)="addToSignalStore(product)">Add to Signal</button>
-              <button (click)="addToNgrxStore(product)">Add to NgRx</button>
+        @for (product of products; track product.id) {
+          <div class="product-card">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <div class="product-footer">
+              <span class="price">\${{ product.price }}</span>
+              <div class="actions">
+                <button (click)="addToRxjsStore(product)">Add to RxJS</button>
+                <button (click)="addToSignalStore(product)">Add to Signal</button>
+                <button (click)="addToNgrxStore(product)">Add to NgRx</button>
+              </div>
             </div>
           </div>
-        </div>
+        }
       </div>
     </div>
   `,
