@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { signalStore, withState, withComputed, withMethods, patchState } from '@ngrx/signals';
+import { computed } from '@angular/core';
 
 export interface CartItem {
   id: number;
@@ -20,8 +21,8 @@ const initialState: CartState = {
 export class CartNgrxStore extends signalStore(
   withState(initialState),
   withComputed(({ items }) => ({
-    totalItems: () => items().reduce((acc, item) => acc + item.quantity, 0),
-    totalPrice: () => items().reduce((acc, item) => acc + (item.price * item.quantity), 0)
+    totalItems: computed(() => items().reduce((acc, item) => acc + item.quantity, 0)),
+    totalPrice: computed(() => items().reduce((acc, item) => acc + (item.price * item.quantity), 0))
   })),
   withMethods((store) => ({
     addItem(item: Omit<CartItem, 'id' | 'quantity'>) {
